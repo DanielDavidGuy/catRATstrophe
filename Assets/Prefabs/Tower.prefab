@@ -107,6 +107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38e90665a82348d69cfd7dc5f3a7905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
+  bulletPrefab: {fileID: 8300910519116636012, guid: 0290bacc25d0044488f8b0f8186e6e12, type: 3}
+  health: 5
+  damage: 5
+  shootingSpeed: 1
+  reloadTime: 1
+  shootForce: 5
 --- !u!50 &2474025088226645393
 Rigidbody2D:
   serializedVersion: 5
