@@ -3,6 +3,7 @@ using UnityEngine;
 public class TileSelector : MonoBehaviour
 {
 	public Tile selectedTile;
+    [SerializeField] private bool highlightSelectedTile = false;
 
     void Update()
     {
@@ -11,9 +12,9 @@ public class TileSelector : MonoBehaviour
 		if (collision == null) return;
 		Tile newTile = collision.GetComponent<Tile>();
 		if (newTile == null || newTile == selectedTile) return;
-        if (selectedTile != null) selectedTile.setHighlighted(false);
+        if (selectedTile != null && highlightSelectedTile) selectedTile.setHighlighted(false);
         selectedTile = newTile;
-        selectedTile.setHighlighted(true);
+        if (highlightSelectedTile) selectedTile.setHighlighted(true);
     }
 
 }
