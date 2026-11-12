@@ -17,6 +17,10 @@ public class Bullet : MonoBehaviour
 		transform.up=dir;
 		StartCoroutine(startCountdown());
 	}
+	
+	public void setDamage(int damage) {
+		hitDamage = damage;
+	}
 
 	public IEnumerator startCountdown(){
 		yield return new WaitForSeconds(lifetime);

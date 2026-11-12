@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour, LevelElement {
     protected virtual IEnumerator Shoot(Vector2 shootDirection,float shootForce){
 		Bullet newBullet = Instantiate(bulletPrefab,transform.position,Quaternion.identity);
 		newBullet.setTarget("Enemy",shootDirection,shootForce);
+		newBullet.setDamage(damage);
 		canShoot = false;
 		yield return new WaitForSeconds(reloadTime);
 		canShoot = true;
