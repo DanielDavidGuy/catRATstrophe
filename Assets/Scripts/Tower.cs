@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tower : MonoBehaviour, LevelElement {
+public class Tower : LevelElement {
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private int health, damage;
     [SerializeField] private float shootingSpeed, reloadTime, shootForce;

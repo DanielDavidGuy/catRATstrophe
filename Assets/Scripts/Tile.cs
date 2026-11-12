@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour
 	[SerializeField] private Color baseColor, offsetColor;
 	[SerializeField] private SpriteRenderer spriteRenderer;
 	[SerializeField] private GameObject highlightTile;
+	[SerializeField] private LevelElement startingElement;
 	private LevelElement levelElement;
 	
 	[Range(0f, 1f)]
@@ -14,6 +15,10 @@ public class Tile : MonoBehaviour
 	void Awake()
 	{
 		highlightTile.SetActive(false);
+	}
+	void Start()
+	{
+		if (startingElement != null) placeElement(startingElement);
 	}
 	public void initializeColor(bool isOffset)
 	{
@@ -25,10 +30,9 @@ public class Tile : MonoBehaviour
 		highlightTile.SetActive(highlighted);
 	}
 
-	public void placeElement<T>(T elementPrefab) where T : Component, LevelElement
+	public void placeElement(LevelElement elementPrefab)
 	{
-		T instance = Instantiate(elementPrefab, transform);
-		levelElement = instance;
+		levelElement = Instantiate(elementPrefab, transform);
 	}
 
 	public LevelElement getElement()

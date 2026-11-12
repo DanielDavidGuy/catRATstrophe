@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface LevelElement
+public abstract class LevelElement : MonoBehaviour
 {
     
 }

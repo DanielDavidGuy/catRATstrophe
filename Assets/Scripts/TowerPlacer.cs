@@ -35,7 +35,7 @@ public class TowerPlacer : MonoBehaviour
 
     private void placeTower(Tile tile)
     {
-        tile.placeElement<Tower>(towerPrefab);
+        tile.placeElement(towerPrefab);
     }
     private void removeTower(Tile tile)
     {

@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 1058468233}
   - component: {fileID: 1058468232}
   - component: {fileID: 1058468231}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ForwardTileCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 1525384836}
   - component: {fileID: 1525384837}
   - component: {fileID: 1525384838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 1626268560}
   - component: {fileID: 1626268559}
   - component: {fileID: 1626268561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1067,7 @@ Transform:
   m_GameObject: {fileID: 1626268558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: 2.5, z: 0}
+  m_LocalPosition: {x: 9, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1101,7 +1101,7 @@ GameObject:
   - component: {fileID: 1865965757}
   - component: {fileID: 1865965761}
   - component: {fileID: 1865965762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

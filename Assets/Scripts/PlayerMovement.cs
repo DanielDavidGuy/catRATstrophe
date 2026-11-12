@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public static PlayerMovement instance;
 	[SerializeField] private float acceleration, terminalVelocity, friction;
 	private float moveSpeed = 0;
 	private Rigidbody2D rigidBody;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 		rigidBody = GetComponent<Rigidbody2D>();
 		input = new PlayerInput();
 		moveAction = input.Player.Move;
+		if (PlayerMovement.instance == null) PlayerMovement.instance = this;
 	}
 
 	void OnEnable() { input.Player.Enable(); }

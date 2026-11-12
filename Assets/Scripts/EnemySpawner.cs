@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour, LevelElement {
+public class EnemySpawner : LevelElement {
 	[SerializeField] private Enemy2D enemyPrefab;
 	[SerializeField] private float spawnTime;
 	

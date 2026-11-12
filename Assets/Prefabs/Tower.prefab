@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7364313477664605890}
   - component: {fileID: 2474025088226645393}
   - component: {fileID: 5262707773622062883}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,5 +184,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
