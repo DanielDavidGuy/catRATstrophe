@@ -1,20 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class Tower : MonoBehaviour, LevelElement
-{
+public class Tower : MonoBehaviour, LevelElement {
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private int health, damage;
     [SerializeField] private float shootingSpeed, reloadTime, shootForce;
     private bool canShoot;
 
-    void Start()
-    {
+    void Start() {
         canShoot = true;
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         if (canShoot) StartCoroutine(Shoot(Vector2.down, shootForce));
     }
 

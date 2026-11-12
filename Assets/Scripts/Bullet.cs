@@ -26,7 +26,10 @@ public class Bullet : MonoBehaviour
 		rb.linearVelocity = transform.up*speed;
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-        // DO THIS LATER
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == target) {
+			other.GetComponent<Enemy2D>().TakeDamage(hitDamage);
+			Destroy(this.gameObject);
+		}
 	}
 }
