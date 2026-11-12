@@ -7,13 +7,17 @@ public class Tower : MonoBehaviour, LevelElement {
     [SerializeField] private int health, damage;
     [SerializeField] private float shootingSpeed, reloadTime, shootForce;
     private bool canShoot;
+	private Vector2 lookDirection;
+	private Enemy2D target;
 
     void Start() {
         canShoot = true;
     }
 
     void FixedUpdate() {
-        if (canShoot) StartCoroutine(Shoot(Vector2.down, shootForce));
+		target = GetClosestEnemy();
+		lookAtEnemy(target);
+        if (canShoot && target != null) StartCoroutine(Shoot(lookDirection, shootForce));
     }
 	
 	protected Enemy2D GetClosestEnemy() {
@@ -28,6 +32,13 @@ public class Tower : MonoBehaviour, LevelElement {
 			}
 		}
 		return targ;
+	}
+
+	protected void lookAtEnemy(Enemy2D enemy)
+	{
+		if (enemy == null) return;
+		lookDirection = enemy.transform.position - transform.position;
+		transform.eulerAngles = new Vector3(0, 0, -90 + Mathf.Atan2(lookDirection.y, lookDirection.x) * 180 / Mathf.PI);
 	}
 
     protected virtual IEnumerator Shoot(Vector2 shootDirection,float shootForce){
