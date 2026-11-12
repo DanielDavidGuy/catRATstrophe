@@ -1,9 +1,15 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Enemy2D : MonoBehaviour {
+	public static HashSet<Enemy2D> Enemies = new HashSet<Enemy2D>();
     [SerializeField]protected float health, moveSpeed;
     private float currentHealth;
 	protected Rigidbody2D rb;
+	
+	void Awake() {
+		Enemies.Add(this);
+	}
 
     void Start() {
         currentHealth = health;
@@ -25,4 +31,8 @@ public class Enemy2D : MonoBehaviour {
 			Destroy(gameObject);
         }
     }
+	
+	void OnDestroy() {
+		Enemies.Remove(this);
+	}
 }
