@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.047058824, g: 0.4627451, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 121de6230a6e9436f9becc7ed5a0b412, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,10 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a611c001d024bc4a2440848a9a7532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tile
-  baseColor: {r: 0.047303643, g: 0.46226418, b: 0, a: 1}
-  offsetColor: {r: 0.10513829, g: 0.5754717, b: 0, a: 1}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
+  offsetColor: {r: 1, g: 1, b: 1, a: 1}
   spriteRenderer: {fileID: 564265483123110093}
   highlightTile: {fileID: 2478760051671962077}
+  startingElement: {fileID: 0}
   highlightIntensity: 0.5
 --- !u!61 &6043609340762024425
 BoxCollider2D:
