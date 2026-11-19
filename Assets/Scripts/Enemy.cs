@@ -130,7 +130,7 @@ public class Enemy2D : MonoBehaviour
             return;
         }
 
-        Debug.Log("Path length = " + path.Count);
+        //Debug.Log("Path length = " + path.Count);
     }
 
     void OnDestroy()

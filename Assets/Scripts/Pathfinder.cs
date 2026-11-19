@@ -26,9 +26,9 @@ public class Pathfinder : MonoBehaviour
         Vector3Int startCell = grid.WorldToCell(startWorld);
         Vector3Int targetCell = grid.WorldToCell(targetWorld);
 
-        Debug.Log($"Start cell: {startCell}");
-        Debug.Log($"Target cell: {targetCell}");
-        Debug.Log($"Target walkable: {grid.IsWalkable(targetCell)}");
+        //Debug.Log($"Start cell: {startCell}");
+        //Debug.Log($"Target cell: {targetCell}");
+        //Debug.Log($"Target walkable: {grid.IsWalkable(targetCell)}");
 
         if (!grid.IsWalkable(targetCell))
         {
@@ -73,7 +73,7 @@ public class Pathfinder : MonoBehaviour
 
             openList.Remove(current);
             closedSet.Add(current.cell);
-            Debug.Log($"Exploring cell: {current.cell}");
+            //Debug.Log($"Exploring cell: {current.cell}");
 
             // done, at the target
             if (current.cell == targetCell)
@@ -85,7 +85,7 @@ public class Pathfinder : MonoBehaviour
             foreach (Vector3Int dir in directions)
             {
                 Vector3Int neighborCell = current.cell + dir;
-                Debug.Log($"Checking neighbor: {neighborCell}, Walkable: {grid.IsWalkable(neighborCell)}");
+                //Debug.Log($"Checking neighbor: {neighborCell}, Walkable: {grid.IsWalkable(neighborCell)}");
 
                 if (closedSet.Contains(neighborCell) || !grid.IsWalkable(neighborCell)) continue;
 

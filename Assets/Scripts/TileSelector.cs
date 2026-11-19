@@ -7,7 +7,9 @@ public class TileSelector : MonoBehaviour
 
     void Update()
     {
-        Collider2D collision = Physics2D.OverlapPoint(transform.position);
+        int collisionMask = Physics2D.GetLayerCollisionMask(gameObject.layer);
+        Collider2D collision = Physics2D.OverlapPoint(transform.position, collisionMask);
+        Debug.Log(collision);
 
 		if (collision == null) return;
 		Tile newTile = collision.GetComponent<Tile>();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 564265483123110093}
   - component: {fileID: 7702247729201546489}
   - component: {fileID: 6043609340762024425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 564265483123110093}
   highlightTile: {fileID: 2478760051671962077}
   startingElement: {fileID: 0}
-  highlightIntensity: 0.5
 --- !u!61 &6043609340762024425
 BoxCollider2D:
   m_ObjectHideFlags: 0

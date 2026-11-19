@@ -35,7 +35,7 @@ public class GridManager : MonoBehaviour
             tiles.Add(cell, tile);
         }
 
-        Debug.Log($"Registered {tiles.Count} tiles");
+        //Debug.Log($"Registered {tiles.Count} tiles");
     }
 
     public Vector3Int WorldToCell(Vector3 worldPos)
