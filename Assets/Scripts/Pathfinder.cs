@@ -42,12 +42,20 @@ public class Pathfinder : MonoBehaviour
 
         Node startNode = new Node(startCell);
         startNode.gCost = 0;
-        startNode.hCost = GetManhattanDistance(startCell, targetCell);
+        startNode.hCost = GetOctileDistance(startCell, targetCell);
         openList.Add(startNode);
         allNodes[startCell] = startNode;
 
         Vector3Int[] directions = {
-            Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right
+            Vector3Int.up,
+            Vector3Int.down,
+            Vector3Int.left,
+            Vector3Int.right,
+
+            new Vector3Int(1, 1, 0),
+            new Vector3Int(1, -1, 0),
+            new Vector3Int(-1, 1, 0),
+            new Vector3Int(-1, -1, 0)
         };
 
         while (openList.Count > 0)
@@ -78,10 +86,20 @@ public class Pathfinder : MonoBehaviour
             {
                 Vector3Int neighborCell = current.cell + dir;
                 Debug.Log($"Checking neighbor: {neighborCell}, Walkable: {grid.IsWalkable(neighborCell)}");
-                
+
                 if (closedSet.Contains(neighborCell) || !grid.IsWalkable(neighborCell)) continue;
 
-                int newGCost = current.gCost + 1;
+                if (dir.x != 0 && dir.y != 0) // diagonal
+                {
+                    Vector3Int horizontal = current.cell + new Vector3Int(dir.x, 0, 0);
+                    Vector3Int vertical = current.cell + new Vector3Int(0, dir.y, 0);
+
+                    if (!grid.IsWalkable(horizontal) || !grid.IsWalkable(vertical))
+                        continue;
+                }
+
+                int moveCost = (dir.x != 0 && dir.y != 0) ? 14 : 10;
+                int newGCost = current.gCost + moveCost;
                 if (!allNodes.TryGetValue(neighborCell, out Node neighborNode)) // neighborNode defined if found, otherwise falsy
                 {
                     neighborNode = new Node(neighborCell);
@@ -91,7 +109,7 @@ public class Pathfinder : MonoBehaviour
                 if (newGCost < neighborNode.gCost || !openList.Contains(neighborNode)) // new tile
                 {
                     neighborNode.gCost = newGCost;
-                    neighborNode.hCost = GetManhattanDistance(neighborCell, targetCell);
+                    neighborNode.hCost = GetOctileDistance(neighborCell, targetCell);
                     neighborNode.parent = current;
 
                     if (!openList.Contains(neighborNode)) openList.Add(neighborNode);
@@ -116,8 +134,19 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
 
-    private int GetManhattanDistance(Vector3Int a, Vector3Int b) // our h() algo for now
+    // private int GetManhattanDistance(Vector3Int a, Vector3Int b) // our h() algo for now
+    // {
+    //     return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    // }
+
+    private int GetOctileDistance(Vector3Int a, Vector3Int b) // our better h() algo
     {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+        int dx = Mathf.Abs(a.x - b.x);
+        int dy = Mathf.Abs(a.y - b.y);
+
+        int diagonal = Mathf.Min(dx, dy);
+        int straight = Mathf.Max(dx, dy) - diagonal;
+
+        return diagonal * 14 + straight * 10;
     }
 }
