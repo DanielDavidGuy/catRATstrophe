@@ -14,7 +14,7 @@ public class Enemy2D : MonoBehaviour
     [SerializeField] private Vector3Int targetTile;
     private List<Vector3> path;
     private int currentPathIndex;
-    [SerializeField] private float targetThreshold = 0.1f;
+    [SerializeField] private float targetThreshold = 2.0f;
     private GridManager grid;
 
     void Awake()
@@ -45,8 +45,25 @@ public class Enemy2D : MonoBehaviour
             return;
         }
 
-        Vector2 targetPos = path[currentPathIndex];
         Vector2 currentPos = rb.position;
+
+        while (currentPathIndex < path.Count - 1)
+        {
+            float currentDistance = Vector2.Distance(
+                currentPos, path[currentPathIndex]
+            );
+
+            float nextDistance = Vector2.Distance(
+                currentPos, path[currentPathIndex + 1]
+            );
+
+            if (nextDistance < currentDistance)
+                currentPathIndex++;
+            else
+                break;
+        }
+
+        Vector2 targetPos = path[currentPathIndex];
         Vector2 direction = (targetPos - currentPos).normalized;
 
         rb.linearVelocity = direction * moveSpeed;
@@ -58,10 +75,17 @@ public class Enemy2D : MonoBehaviour
 
         if (rb.linearVelocity.sqrMagnitude > 0.01f)
         {
-            float targetAngle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg - 90f;
+            float targetAngle = Mathf.Atan2(
+                rb.linearVelocity.y,
+                rb.linearVelocity.x
+            ) * Mathf.Rad2Deg - 90f;
+
             float maxStep = 30f;
 
-            float nextAngle = Mathf.MoveTowardsAngle(rb.rotation, targetAngle, maxStep);
+            float nextAngle = Mathf.MoveTowardsAngle(
+                rb.rotation, targetAngle, maxStep
+            );
+
             rb.MoveRotation(nextAngle);
         }
     }
