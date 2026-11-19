@@ -10,14 +10,11 @@ public class TowerPlacer : MonoBehaviour
 	[SerializeField] private int startingResourceCount;
     private PlayerInput input;
     private InputAction placeAction;
-	private int resourceCount;
 
     void Awake()
     {
         input = new PlayerInput();
         placeAction = input.Player.Place;
-		resourceCount = startingResourceCount;
-		ResourceUI.resourceDisplay = startingResourceCount;
     }
 
     void OnEnable()
@@ -38,34 +35,25 @@ public class TowerPlacer : MonoBehaviour
         if (tile.hasElement()) {
 			if (tile.getElement() is Resource resource) {
 				if (resource.resourcesAvailable > 0) {
-					StartCoroutine(mineResources(resource));
+					StartCoroutine(resource.mine());
 				}
 			} else {
 				removeTower(tile);
 			}
 			
-		} else if (resourceCount > 0) {
+		} else {
 			placeTower(tile);
 		} //else
 			//Flyaway text "Not enough resources!"
     }
-	
-	private IEnumerator mineResources(Resource resource) {
-		resourceCount += resource.resourcesAvailable;
-		ResourceUI.resourceDisplay = resourceCount;
-		resource.resourcesAvailable = 0;
-		yield return new WaitForSeconds(5);
-		resource.resourcesAvailable = 1;
-	}
 
     private void placeTower(Tile tile) {
+        if (Inventory.inventory["yarn"] <= 0) return;
         tile.placeElement(towerPrefab);
-		resourceCount--;
-		ResourceUI.resourceDisplay--;
+		Inventory.inventory["yarn"]--;
     }
     private void removeTower(Tile tile) {
         tile.destroyElement();
-		resourceCount++;
-		ResourceUI.resourceDisplay++;
+		Inventory.inventory["yarn"]++;
     }
 }

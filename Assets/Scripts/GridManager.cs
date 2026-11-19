@@ -11,11 +11,13 @@ public class GridManager : MonoBehaviour
     [SerializeField] private float cellSize = 2f;
     [SerializeField] private Vector2 gridOrigin = new Vector2(-8, -4);
 
+    [System.Obsolete]
     void Awake()
     {
         RegisterTiles();
     }
 
+    [System.Obsolete]
     private void RegisterTiles()
     {
         Tile[] allTiles = FindObjectsByType<Tile>(
