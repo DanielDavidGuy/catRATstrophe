@@ -9,8 +9,8 @@ public class Tile : MonoBehaviour
 	[SerializeField] private LevelElement startingElement;
 	private LevelElement levelElement;
 	
-	[Range(0f, 1f)]
-	[SerializeField] private float highlightIntensity = 0.5f;
+	// [Range(0f, 1f)]
+	// [SerializeField] private float highlightIntensity = 0.5f;
 
 	void Awake()
 	{

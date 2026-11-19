@@ -815,6 +815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 174932500}
   - component: {fileID: 174932499}
+  - component: {fileID: 174932501}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -1030,6 +1031,27 @@ Transform:
   - {fileID: 33847409}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &174932501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174932498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bda3cf51b0074301bb1740105c8c582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridManager
+  width: 0
+  height: 0
+  tilePrefab: {fileID: 0}
+  camera: {fileID: 0}
+  groundTilemap: {fileID: 374987851}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  nodeRadius: 0.4
 --- !u!1001 &194504380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,9 +2303,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 174932500}
     m_Modifications:
+    - target: {fileID: 564265483123110093, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
+      propertyPath: m_Color.b
+      value: 0.40924877
+      objectReference: {fileID: 0}
+    - target: {fileID: 564265483123110093, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
+      propertyPath: m_Color.g
+      value: 0.86415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 564265483123110093, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
+      propertyPath: m_Color.r
+      value: 0.48273355
+      objectReference: {fileID: 0}
     - target: {fileID: 2191454729607024190, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
       propertyPath: m_Name
-      value: Tile
+      value: TheTile
       objectReference: {fileID: 0}
     - target: {fileID: 7302003654474340501, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11846,6 +11880,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7302003654474340501, guid: b9bfc658880de49e49318b9f6ece7d68, type: 3}
   m_PrefabInstance: {fileID: 1982755545}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2035789673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2035789674}
+  - component: {fileID: 2035789675}
+  m_Layer: 0
+  m_Name: Pathfinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2035789674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035789673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.43257, y: 1.56863, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2035789675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035789673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3326464d8e063a244964a32d4659e7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pathfinder
+  grid: {fileID: 0}
 --- !u!1001 &2048326584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12470,6 +12549,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2035789674}
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 174932500}

@@ -155,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   health: 10
   moveSpeed: 1
+  targetTile: {x: 4, y: 2, z: 0}
+  targetThreshold: 0.1
 --- !u!50 &8774169954510504578
 Rigidbody2D:
   serializedVersion: 5

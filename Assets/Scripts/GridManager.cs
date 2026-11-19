@@ -1,31 +1,79 @@
-using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField]private int width, height;
-    [SerializeField]private Tile tilePrefab;
-    [SerializeField]private Camera camera;
-    void Start()
+    private Dictionary<Vector3Int, Tile> tiles =
+        new Dictionary<Vector3Int, Tile>();
+
+    [SerializeField] private LayerMask obstacleLayer;
+    [SerializeField] private float nodeRadius = 0.4f;
+    [SerializeField] private float cellSize = 2f;
+    [SerializeField] private Vector2 gridOrigin = new Vector2(-8, -4);
+
+    void Awake()
     {
-        GenerateGrid(width, height);
+        RegisterTiles();
     }
 
-    // Update is called once per frame
-    public void GenerateGrid(int width, int height)
+    private void RegisterTiles()
     {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                Tile newTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
-                newTile.name = $"Tile {x} {y}";
+        Tile[] allTiles = FindObjectsByType<Tile>(
+            FindObjectsSortMode.None
+        );
 
-                bool isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                newTile.initializeColor(isOffset);
+        foreach (Tile tile in allTiles)
+        {
+            Vector3Int cell = WorldToCell(tile.transform.position);
+
+            if (tiles.ContainsKey(cell))
+            {
+                Debug.LogWarning($"Duplicate tile at {cell}");
+                continue;
             }
+
+            tiles.Add(cell, tile);
         }
 
-        camera.transform.position = new Vector3((float)width/2 - 0.5f, (float)height/2 - 0.5f, -10);
+        Debug.Log($"Registered {tiles.Count} tiles");
+    }
+
+    public Vector3Int WorldToCell(Vector3 worldPos)
+    {
+        int x = Mathf.RoundToInt((worldPos.x - gridOrigin.x) / cellSize);
+        int y = Mathf.RoundToInt((worldPos.y - gridOrigin.y) / cellSize);
+
+        return new Vector3Int(x, y, 0);
+    }
+
+    public Vector3 CellToWorldCenter(Vector3Int cellPos)
+    {
+        return new Vector3(
+            gridOrigin.x + cellPos.x * cellSize,
+            gridOrigin.y + cellPos.y * cellSize,
+            0
+        );
+    }
+
+    public Tile GetTile(Vector3Int cellPos)
+    {
+        tiles.TryGetValue(cellPos, out Tile tile);
+        return tile;
+    }
+
+    public bool IsWalkable(Vector3Int cellPos)
+    {
+        if (!tiles.ContainsKey(cellPos))
+            return false;
+
+        Vector3 worldCenter = CellToWorldCenter(cellPos);
+
+        Collider2D hit = Physics2D.OverlapCircle(
+            worldCenter,
+            nodeRadius,
+            obstacleLayer
+        );
+
+        return hit == null;
     }
 }
